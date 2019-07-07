@@ -126,7 +126,7 @@ public class SAnalytics {
                 synchronized (eventLock) {
                 }
                 AnalyticsData analyticsData = new AnalyticsData(AnalyticsData.TYPE_SCREEN_VIEW,
-                        screenName, null, getOurInstance().userId, getOurInstance().deviceInfo, true);
+                        screenName, null, getOurInstance().userId, getOurInstance().deviceInfo);
                 analyticsData.setScreenType(screenType);
                 analyticsData.setLifeCycleType(lifeCycleType);
                 insertToDb(analyticsData);
@@ -145,7 +145,7 @@ public class SAnalytics {
         }
     }
 
-    public static void trackEvent(final String name, final HashMap<String, String> params, final boolean legacy) {
+    public static void trackEvent(final String name, final HashMap<String, String> params) {
         if (!initialized()) {
             log("SnappFood Analytics is not initialized yet");
             return;
@@ -157,7 +157,7 @@ public class SAnalytics {
                 synchronized (eventLock) {
                 }
                 AnalyticsData analyticsData = new AnalyticsData(
-                        AnalyticsData.TYPE_EVENT, name, params, getOurInstance().userId, getOurInstance().deviceInfo, legacy);
+                        AnalyticsData.TYPE_EVENT, name, params, getOurInstance().userId, getOurInstance().deviceInfo);
                 insertToDb(analyticsData);
             }
         });
