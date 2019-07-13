@@ -27,8 +27,8 @@ public class SAnalytics {
     private Executor dbExecutor;
     private Config config;
     private Application application;
-    private String userId;
-    private String storeName;
+    private String userId = "";
+    private String storeName = "";
     private DeviceInfo deviceInfo;
     private SharedPreferences sharedPreferences;
     private final static Object eventLock = new Object();
