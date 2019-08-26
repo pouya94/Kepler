@@ -31,14 +31,17 @@ public class AnalyticsData {
     private String userId;
     @TypeConverters({ParamsConverter.class})
     private DeviceInfo deviceInfo;
+    private boolean legacy;
 
-    public AnalyticsData(String type, String name, HashMap<String, String> params, String userId, DeviceInfo deviceInfo) {
+
+    public AnalyticsData(String type, String name, HashMap<String, String> params, String userId, DeviceInfo deviceInfo, boolean legacy) {
         this.timeStamp = System.currentTimeMillis();
         this.type = type;
         this.name = name;
         this.params = params;
         this.userId = userId;
         this.deviceInfo = deviceInfo;
+        this.legacy = legacy;
     }
 
     @Override
@@ -50,6 +53,9 @@ public class AnalyticsData {
             }
         }
         String dbName = "applog";
+        if (legacy) {
+            dbName += "_old";
+        }
         return dbName + "," +
                 "\"timeStamp\"=\"" + timeStamp + "\"," +
                 deviceInfo.toString() +
@@ -132,6 +138,14 @@ public class AnalyticsData {
 
     public void setDeviceInfo(DeviceInfo deviceInfo) {
         this.deviceInfo = deviceInfo;
+    }
+
+    public boolean isLegacy() {
+        return legacy;
+    }
+
+    public void setLegacy(boolean legacy) {
+        this.legacy = legacy;
     }
 
 }

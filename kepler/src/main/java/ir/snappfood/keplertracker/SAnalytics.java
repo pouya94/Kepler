@@ -60,6 +60,7 @@ public class SAnalytics {
         });
         context.registerActivityLifecycleCallbacks(new SActivityLifecycleCallbacks());
         getOurInstance().storeName = config.storeName;
+        getOurInstance().userId = config.userId;
         getOurInstance().sharedPreferences =
                 context.getSharedPreferences(SHARED_PREFERENCES_TAG, Context.MODE_PRIVATE);
     }
@@ -69,6 +70,7 @@ public class SAnalytics {
         private boolean logEnabled = true;
         private int batchCount = 50;
         private String storeName = "";
+        private String userId = "";
 
         private Config() {
         }
@@ -89,6 +91,11 @@ public class SAnalytics {
 
         public Config setStoreName(String storeName) {
             this.storeName = storeName;
+            return this;
+        }
+
+        public Config setUserId(String userId) {
+            this.userId = userId;
             return this;
         }
 
@@ -126,7 +133,7 @@ public class SAnalytics {
                 synchronized (eventLock) {
                 }
                 AnalyticsData analyticsData = new AnalyticsData(AnalyticsData.TYPE_SCREEN_VIEW,
-                        screenName, null, getOurInstance().userId, getOurInstance().deviceInfo);
+                        screenName, null, getOurInstance().userId, getOurInstance().deviceInfo, false);
                 analyticsData.setScreenType(screenType);
                 analyticsData.setLifeCycleType(lifeCycleType);
                 insertToDb(analyticsData);
@@ -145,7 +152,7 @@ public class SAnalytics {
         }
     }
 
-    public static void trackEvent(final String name, final HashMap<String, String> params) {
+    public static void trackEvent(final String name, final HashMap<String, String> params, final boolean legacy) {
         if (!initialized()) {
             log("SnappFood Analytics is not initialized yet");
             return;
@@ -157,7 +164,7 @@ public class SAnalytics {
                 synchronized (eventLock) {
                 }
                 AnalyticsData analyticsData = new AnalyticsData(
-                        AnalyticsData.TYPE_EVENT, name, params, getOurInstance().userId, getOurInstance().deviceInfo);
+                        AnalyticsData.TYPE_EVENT, name, params, getOurInstance().userId, getOurInstance().deviceInfo, legacy);
                 insertToDb(analyticsData);
             }
         });
