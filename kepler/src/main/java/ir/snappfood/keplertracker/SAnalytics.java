@@ -180,7 +180,7 @@ public class SAnalytics {
         }
     }
 
-    public static void sendAnalyticsEvents(final int maxCount) {
+    public static void sendAnalyticsEvents(final int maxCount, final int threshold) {
         if (!initialized()) {
             log("SnappFood Analytics is not initialized yet");
             return;
@@ -191,10 +191,11 @@ public class SAnalytics {
             public void run() {
                 synchronized (sendLock) {
                     int batchCount = maxCount != -1 ? maxCount : getOurInstance().config.batchCount;
+                    int finalThreshold = (threshold < 1) ? batchCount : threshold;
                     long count = getOurInstance().appDatabase.analyticsDataDao().count();
                     log("check sending data with count = " + count);
                     List<AnalyticsData> events;
-                    if (count >= batchCount) {
+                    if (count >= finalThreshold) {
                         events = getOurInstance().appDatabase.analyticsDataDao().fetch(batchCount);
                         if (events != null && events.size() > 0) {
                             StringBuilder body = new StringBuilder();

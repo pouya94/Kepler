@@ -25,7 +25,7 @@ public class SActivityLifecycleCallbacks implements Application.ActivityLifecycl
     public void onActivityResumed(Activity activity) {
         SAnalytics.setScreenName(getSimpleClassName(activity.getClass()),
                 AnalyticsData.SCREEN_TYPE_ACTIVITY, AnalyticsData.LIFE_CYCLE_TYPE_OPEN);
-        SAnalytics.sendAnalyticsEvents(-1);
+        SAnalytics.sendAnalyticsEvents(-1, -1);
     }
 
     @Override
