@@ -1,6 +1,7 @@
 package ir.snappfood.keplertracker;
 
-import android.arch.persistence.room.TypeConverter;
+
+import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,7 +29,7 @@ public class ParamsConverter {
     public static DeviceInfo StringToDeviceInfo(String serializedInfo) {
         try {
             return gson.fromJson(serializedInfo, DeviceInfo.class);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new DeviceInfo();

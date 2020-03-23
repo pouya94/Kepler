@@ -2,12 +2,13 @@ package ir.snappfood.keplertracker;
 
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteFullException;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import java.util.HashMap;
 import java.util.List;

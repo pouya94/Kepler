@@ -1,7 +1,8 @@
 package ir.snappfood.keplertracker;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import static ir.snappfood.keplertracker.Utils.getSimpleClassName;
 
