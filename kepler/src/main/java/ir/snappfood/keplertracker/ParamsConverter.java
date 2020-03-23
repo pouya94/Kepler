@@ -26,7 +26,12 @@ public class ParamsConverter {
 
     @TypeConverter
     public static DeviceInfo StringToDeviceInfo(String serializedInfo) {
-        return gson.fromJson(serializedInfo, DeviceInfo.class);
+        try {
+            return gson.fromJson(serializedInfo, DeviceInfo.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new DeviceInfo();
     }
 
     @TypeConverter

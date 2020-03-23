@@ -59,6 +59,10 @@ class DeviceInfo {
     private int connectivity_type;
     private int network_type;
 
+    public DeviceInfo() {
+
+    }
+
     public DeviceInfo(final Context context) {
         Resources resources = context.getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
