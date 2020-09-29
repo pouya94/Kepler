@@ -86,7 +86,9 @@ public class SAnalytics {
         }
 
         public Config setBatchCount(int batchCount) {
-            this.batchCount = batchCount;
+            if (batchCount > 0) {
+                this.batchCount = batchCount;
+            }
             return this;
         }
 
@@ -111,6 +113,12 @@ public class SAnalytics {
 
     public static void logout() {
         getOurInstance().userId = "";
+    }
+
+    public static void setBatchCount(int count) {
+        if (getOurInstance().config != null) {
+            getOurInstance().config.setBatchCount(count);
+        }
     }
 
     static void setUpFragmentLifeCycleHandler(AppCompatActivity activity) {
